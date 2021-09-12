@@ -3,9 +3,13 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: {
+    'hello-world': './src/hello-world.js',
+    luffy: './src/luffy.js',
+    archer: './src/archer.js',
+  },
   output: {
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     path: path.resolve(__dirname, './dist'),
     publicPath: '',
   },
@@ -74,10 +78,30 @@ module.exports = {
         path.join(process.cwd(), 'build/**/*'),
       ],
     }),
+    // Html will take chunk name from entry point configuration
     new HtmlWebpackPlugin({
+      filename: 'hello-world.html',
+      chunks: ['hello-world'],
       title: 'Hello World',
-      template: 'src/index.hbs',
+      template: 'src/page-template.hbs',
       description: 'Some description',
+      minify: false,
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'luffy.html',
+      chunks: ['luffy'],
+      title: 'Luffy',
+      template: 'src/page-template.hbs',
+      description: 'King Of The Pirates',
+      minify: false,
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'archer.html',
+      chunks: ['archer'],
+      title: 'Archer',
+      template: 'src/page-template.hbs',
+      description: 'The Best Detective',
+      minify: false,
     }),
   ],
 };
