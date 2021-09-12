@@ -7,6 +7,7 @@ module.exports = {
   entry: {
     'hello-world': './src/hello-world.js',
     luffy: './src/luffy.js',
+    archer: './src/archer.js',
   },
   output: {
     filename: '[name].[contenthash].js',
@@ -15,7 +16,7 @@ module.exports = {
   },
   mode: 'production',
   optimization: {
-    splitChunks: { chunks: 'all' },
+    splitChunks: { chunks: 'all', minSize: 3000 },
   },
   module: {
     rules: [
@@ -89,6 +90,14 @@ module.exports = {
       title: 'Luffy',
       template: 'src/page-template.hbs',
       description: 'King Of The Pirates',
+      minify: false,
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'archer.html',
+      chunks: ['archer'],
+      title: 'Archer',
+      template: 'src/page-template.hbs',
+      description: 'The Best Detective',
       minify: false,
     }),
   ],
